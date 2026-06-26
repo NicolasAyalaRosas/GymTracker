@@ -23,7 +23,7 @@
 html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5}
 
 /* ── LAYOUT SHELL ── */
-.shell{display:flex;height:100vh;overflow:hidden}
+.shell{display:flex;height:100vh;height:100dvh;overflow:hidden}
 
 /* Sidebar (desktop/tablet landscape) */
 .sidebar{
@@ -40,7 +40,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .sb-btn i{font-size:20px}
 
 /* Main content area */
-.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;min-width:0}
+.main{flex:1;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden}
 
 /* Bottom nav (mobile) */
 .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);z-index:100;padding-bottom:env(safe-area-inset-bottom)}
@@ -50,9 +50,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .nav-btn i{font-size:22px}
 
 /* Pages */
-.page{display:none;flex:1;min-height:0}
-.page.active{display:flex;flex-direction:column}
-.page-scroll{flex:1;overflow-y:auto;padding:24px;max-width:900px;width:100%;margin:0 auto}
+.page{display:none;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+.page.active{display:flex}
+.page-scroll{flex:1;overflow-y:auto;padding:24px;max-width:900px;width:100%;margin:0 auto;-webkit-overflow-scrolling:touch}
 
 /* Header */
 .header{background:var(--card);border-bottom:1px solid var(--border);padding:20px 24px 14px;position:sticky;top:0;z-index:50}
@@ -98,7 +98,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .ex-card.open .ex-body{display:block}
 
 /* Sets grid */
-.sets-grid{display:grid;grid-template-columns:28px 1fr 1fr 36px;gap:8px;align-items:center}
+.sets-grid{display:grid;grid-template-columns:24px 1fr 1fr 62px 34px;gap:6px;align-items:center}
 .col-label{font-size:10px;color:var(--text2);text-align:center;font-weight:500;padding:6px 0}
 .series-num{font-size:12px;font-weight:600;color:var(--text2);text-align:center}
 .series-input{width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:14px;text-align:center;background:var(--bg);color:var(--text);-moz-appearance:textfield;transition:border-color .15s}
@@ -181,6 +181,12 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .empty{text-align:center;padding:48px 20px;color:var(--text2)}
 .empty i{font-size:44px;margin-bottom:10px;display:block;opacity:.35}
 
+/* Per-set unit toggle */
+.unit-toggle{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden;flex-shrink:0}
+.unit-opt{padding:0 7px;height:34px;line-height:34px;font-size:11px;font-weight:700;border:none;background:none;cursor:pointer;color:var(--text2);transition:all .15s;letter-spacing:.3px}
+.unit-opt.sel-kg{background:var(--purple);color:#fff}
+.unit-opt.sel-lb{background:var(--teal);color:#fff}
+
 /* ── RESPONSIVE ── */
 /* Mobile: hide sidebar, show bottom nav */
 @media(max-width:700px){
@@ -235,6 +241,14 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <div class="page-scroll">
         <div class="section-title">Día de la semana</div>
         <div class="chips" id="day-chips"></div>
+        <div id="resume-banner" style="display:none;background:var(--warn-light);border:1px solid #F0C270;border-radius:var(--radius);padding:12px 14px;margin-bottom:16px;align-items:center;gap:10px">
+          <i class="ti ti-refresh" style="font-size:20px;color:var(--warn);flex-shrink:0"></i>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:600;color:var(--warn)">Entrenamiento en progreso</div>
+            <div id="resume-text" style="font-size:12px;color:var(--warn)"></div>
+          </div>
+          <button class="btn btn-sm" style="background:var(--warn);color:#fff;flex-shrink:0" id="resume-btn">Continuar</button>
+        </div>
         <div class="section-title">Rutinas</div>
         <div class="routine-grid" id="routine-list"></div>
       </div>
@@ -349,97 +363,132 @@ const ROUTINES=[
     id:'upperA', name:'Upper A', type:'upper', day:'Lunes',
     desc:'Pecho · Espalda · Hombros · Tríceps',
     exercises:[
-      {name:'Press De Pecho con Barra',            series:4,reps:'8–10', rest:C,notes:'Agarre ligeramente mayor que hombros. Barra baja al esternón'},
-      {name:'Press Banco Inclinado Mancuerna',     series:3,reps:'8–10', rest:C,notes:'30–45° inclinación. Énfasis en pecho superior'},
-      {name:'Cristos Máquina Peck Fly',            series:3,reps:'10–12',rest:A,notes:'Contrae pecho en el cierre'},
-      {name:'Aperturas Mancuerna Banco Plano ✦',           series:3,reps:'12–15',rest:A,notes:'Codos ligeramente flexionados. Baja hasta sentir estiramiento. No depende de polea'},
-      {name:'Remo Máquina Unilateral',             series:4,reps:'8–10', rest:C,notes:'Codo cerca del cuerpo'},
-      {name:'Jalón Al Frente (LatPull Down)',      series:3,reps:'8–10', rest:C,notes:'Agarre ligeramente mayor que hombros'},
-      {name:'Press Militar con Barra',             series:3,reps:'8–10', rest:C,notes:'Core apretado, no arquear la espalda'},
-      {name:'Elevaciones Laterales Mancuerna',     series:3,reps:'12–15',rest:A,notes:'Codo ligeramente doblado'},
-      {name:'Tríceps En Polea',                    series:3,reps:'10–12',rest:A,notes:'Codos fijos al costado'},
+      {name:'Press De Pecho con Barra',               series:4,reps:'8–10', rest:C,notes:'Agarre ligeramente mayor que hombros. Barra baja al esternón'},
+      {name:'Press Banco Inclinado Mancuerna',        series:3,reps:'8–10', rest:C,notes:'30–45° inclinación, énfasis en pecho superior'},
+      {name:'Cristos Máquina Peck Fly',               series:3,reps:'10–12',rest:A,notes:'Contrae pecho en el cierre'},
+      {name:'Aperturas Mancuerna Banco Plano ✦',     series:3,reps:'12–15',rest:A,notes:'Codos ligeramente flexionados. Baja hasta sentir estiramiento. No depende de polea'},
+      {name:'Remo Máquina Unilateral',                series:4,reps:'8–10', rest:C,notes:'Codo cerca del cuerpo'},
+      {name:'Jalón Al Frente (LatPull Down)',         series:3,reps:'8–10', rest:C,notes:'Agarre ligeramente mayor que hombros'},
+      {name:'Press Militar con Barra',                series:3,reps:'8–10', rest:C,notes:'Core apretado, no arquear la espalda'},
+      {name:'Elevaciones Laterales Mancuerna',        series:3,reps:'12–15',rest:A,notes:'Codo ligeramente doblado'},
+      {name:'Tríceps En Polea',                       series:3,reps:'10–12',rest:A,notes:'Codos fijos al costado'},
     ]
   },
   {
     id:'lowerA', name:'Lower A', type:'lower', day:'Martes',
     desc:'Cuádriceps · Femoral · Glúteo · Pantorrilla',
     exercises:[
-      {name:'Sentadilla En Smith',                 series:4,reps:'8–10', rest:C,notes:'Pies a la altura de hombros'},
-      {name:'Leg Press 45°',                       series:3,reps:'10–12',rest:C,notes:'Rodillas no pasan los pies'},
-      {name:'Peso Muerto Rumano con Mancuernas ✦',        series:4,reps:'8–10', rest:C,notes:'Caderas atrás, espalda neutral. Las mancuernas bajan por la espinilla. Ideal para aprender el patrón'},
-      {name:'Extensión De Pierna (Máquina)',       series:3,reps:'12–15',rest:A,notes:'Control en la bajada'},
-      {name:'Seated Leg Curl',                     series:3,reps:'10–12',rest:A,notes:'Contrae al máximo'},
-      {name:'Hip Thrust Máquina',                  series:3,reps:'10–12',rest:C,notes:'Variante: patada trasera en cable'},
-      {name:'Glúteo En Máquina (Hip Abduction)',   series:3,reps:'12–15',rest:A,notes:'Aprieta glúteo en el cierre'},
-      {name:'Abducción De Cadera En Máquina',      series:3,reps:'12–15',rest:A,notes:'Movimiento controlado, no uses impulso'},
-      {name:'Pantorrilla Sentado Máquina',         series:4,reps:'12–15',rest:A,notes:'Rango completo de movimiento'},
-      {name:'Abdominales En Máquina',              series:3,reps:'12–15',rest:A,notes:'Exhala al contraer'},
+      {name:'Sentadilla En Smith',                    series:4,reps:'8–10', rest:C,notes:'Pies a la altura de hombros'},
+      {name:'Leg Press 45°',                         series:3,reps:'10–12',rest:C,notes:'Rodillas no pasan los pies'},
+      {name:'Peso Muerto Rumano con Mancuernas ✦',  series:4,reps:'8–10', rest:C,notes:'Caderas atrás, espalda neutral. Las mancuernas bajan por la espinilla'},
+      {name:'Extensión De Pierna (Máquina)',          series:3,reps:'12–15',rest:A,notes:'Control en la bajada'},
+      {name:'Seated Leg Curl',                        series:3,reps:'10–12',rest:A,notes:'Contrae al máximo'},
+      {name:'Hip Thrust Máquina',                     series:3,reps:'10–12',rest:C,notes:'Variante: patada trasera en cable bajo'},
+      {name:'Glúteo En Máquina (Hip Abduction)',     series:3,reps:'12–15',rest:A,notes:'Aprieta glúteo en el cierre'},
+      {name:'Abducción De Cadera En Máquina',        series:3,reps:'12–15',rest:A,notes:'Movimiento controlado, no uses impulso'},
+      {name:'Pantorrilla Sentado Máquina',            series:4,reps:'12–15',rest:A,notes:'Rango completo de movimiento'},
+      {name:'Abdominales En Máquina',                 series:3,reps:'12–15',rest:A,notes:'Exhala al contraer'},
     ]
   },
   {
     id:'upperB', name:'Upper B', type:'upper', day:'Jueves',
     desc:'Pecho · Espalda · Hombros · Bíceps · Tríceps',
     exercises:[
-      {name:'Press Banco Inclinado Mancuerna',     series:4,reps:'8–10', rest:C,notes:'Varía ángulo respecto al Upper A'},
-      {name:'Cristos Máquina Peck Fly',            series:3,reps:'10–12',rest:A,notes:'Enfocado en estiramiento'},
-      {name:'Pull Over con Mancuerna en Banco ✦',            series:3,reps:'10–12',rest:A,notes:'Acuéstate perpendicular al banco. Brazos semirrectos, baja mancuerna detrás de la cabeza'},
-      {name:'Jalón Polea Alta con Triángulo',      series:4,reps:'8–10', rest:C,notes:'Tira hacia el esternón'},
-      {name:'Dominada Asistida Agarre Abierto',    series:3,reps:'8–10', rest:C,notes:'El mejor ejercicio para dorsal. Usa el peso de asistencia que necesites'},
-      {name:'Peck Deck Posterior en Máquina',      series:3,reps:'12–15',rest:A,notes:'Siéntate al revés. Alinea codos con hombros. Peso moderado'},
-      {name:'Press Militar con Mancuernas',        series:3,reps:'8–10', rest:C,notes:'Variante al Press Militar con Barra del Upper A'},
-      {name:'Elevaciones Laterales Mancuerna',     series:3,reps:'12–15',rest:A,notes:'Varía agarre respecto al Upper A'},
-      {name:'Curl Bíceps Concentrado',             series:3,reps:'10–12',rest:A,notes:'Codo apoyado en muslo interno'},
-      {name:'Curl Banco Predicador Barra W',       series:3,reps:'8–12', rest:A,notes:'Baja hasta estiramiento completo. No bloquees el codo arriba'},
-      {name:'Tríceps Máquina Agarre Cerrado',      series:3,reps:'10–12',rest:A,notes:'Codos junto al cuerpo'},
+      {name:'Press Banco Inclinado Mancuerna',        series:4,reps:'8–10', rest:C,notes:'Varía ángulo respecto al Upper A'},
+      {name:'Cristos Máquina Peck Fly',               series:3,reps:'10–12',rest:A,notes:'Enfocado en estiramiento'},
+      {name:'Pull Over con Mancuerna en Banco ✦',    series:3,reps:'10–12',rest:A,notes:'Acuéstate perpendicular al banco. Brazos semirrectos, baja mancuerna detrás de la cabeza'},
+      {name:'Jalón Polea Alta con Triángulo',         series:4,reps:'8–10', rest:C,notes:'Tira hacia el esternón'},
+      {name:'Dominada Asistida Agarre Abierto',       series:3,reps:'8–10', rest:C,notes:'El mejor ejercicio para dorsal. Usa la asistencia que necesites'},
+      {name:'Peck Deck Posterior en Máquina',         series:3,reps:'12–15',rest:A,notes:'Siéntate al revés. Alinea codos con hombros. Peso moderado'},
+      {name:'Press Militar con Mancuernas',           series:3,reps:'8–10', rest:C,notes:'Variante al Upper A'},
+      {name:'Elevaciones Laterales Mancuerna',        series:3,reps:'12–15',rest:A,notes:'Varía agarre respecto al Upper A'},
+      {name:'Curl Bíceps Concentrado',                series:3,reps:'10–12',rest:A,notes:'Codo apoyado en muslo interno'},
+      {name:'Curl Banco Predicador Barra W',          series:3,reps:'8–12', rest:A,notes:'Baja hasta estiramiento completo. No bloquees el codo arriba'},
+      {name:'Tríceps Máquina Agarre Cerrado',         series:3,reps:'10–12',rest:A,notes:'Codos junto al cuerpo'},
     ]
   },
   {
     id:'lowerB', name:'Lower B', type:'lower', day:'Viernes',
     desc:'Cuádriceps · Femoral · Glúteo · Pantorrilla',
     exercises:[
-      {name:'Leg Press Unilateral 45°',            series:4,reps:'10–12',rest:C,notes:'Un pie a la vez para corregir desbalances'},
-      {name:'Máquina Hack (Hack Squat)',           series:3,reps:'10–12',rest:C,notes:'Talones elevados si es posible'},
-      {name:'Desplante Búlgaro',                   series:3,reps:'8–10', rest:C,notes:'Pie trasero elevado, tronco erguido'},
-      {name:'Peso Muerto Rumano con Mancuernas ✦',        series:4,reps:'8–10', rest:C,notes:'Mismo patrón que Lower A. Progresa la carga cuando la técnica esté consolidada'},
-      {name:'Seated Leg Curl',                     series:3,reps:'10–12',rest:A,notes:'Pausa 1 seg en contracción'},
-      {name:'Hip Thrust Máquina',                  series:3,reps:'10–12',rest:C,notes:'Añade carga vs Lower A si toleras'},
-      {name:'Máquina Aductora',                    series:3,reps:'12–15',rest:A,notes:'Complementa la abducción del Lower A'},
-      {name:'Pantorrilla En Hack (De Pie)',        series:4,reps:'12–15',rest:A,notes:'Alterna con pantorrilla sentado del Lower A'},
-      {name:'Crunch Oblicuo En Máquina',           series:3,reps:'12–15',rest:A,notes:'Rota hacia el lado activo'},
+      {name:'Leg Press Unilateral 45°',               series:4,reps:'10–12',rest:C,notes:'Un pie a la vez para corregir desbalances'},
+      {name:'Máquina Hack (Hack Squat)',              series:3,reps:'10–12',rest:C,notes:'Talones elevados si es posible'},
+      {name:'Desplante Búlgaro',                      series:3,reps:'8–10', rest:C,notes:'Pie trasero elevado, tronco erguido'},
+      {name:'Peso Muerto Rumano con Mancuernas ✦',  series:4,reps:'8–10', rest:C,notes:'Mismo patrón que Lower A. Progresa la carga cuando la técnica esté consolidada'},
+      {name:'Seated Leg Curl',                        series:3,reps:'10–12',rest:A,notes:'Pausa 1 seg en contracción'},
+      {name:'Hip Thrust Máquina',                     series:3,reps:'10–12',rest:C,notes:'Añade carga respecto al Lower A si toleras'},
+      {name:'Máquina Aductora',                       series:3,reps:'12–15',rest:A,notes:'Complementa la abducción del Lower A'},
+      {name:'Pantorrilla En Hack (De Pie)',           series:4,reps:'12–15',rest:A,notes:'Alterna con pantorrilla sentado del Lower A'},
+      {name:'Crunch Oblicuo En Máquina',              series:3,reps:'12–15',rest:A,notes:'Rota hacia el lado activo'},
     ]
   }
 ];
+
+// ── UNIT (per-set, handled inline) ──────────────────────────────────────────
+
+// ── UNIT (default per-set, 'kg') ─────────────────────────────────────────────
+function getUnit(){ return 'kg' }
+
+// ── DRAFT ──────────────────────────────────────────────────────────────────────
+function draftKey(rid){ return 'gym_draft_'+rid }
+function saveDraft(rid,data){ localStorage.setItem(draftKey(rid),JSON.stringify({ts:Date.now(),data})) }
+function loadDraft(rid){
+  try{
+    const raw=localStorage.getItem(draftKey(rid));
+    if(!raw) return null;
+    const p=JSON.parse(raw);
+    if(Date.now()-p.ts>12*60*60*1000){ clearDraft(rid); return null; }
+    return p.data;
+  }catch{ return null; }
+}
+function clearDraft(rid){ localStorage.removeItem(draftKey(rid)) }
+function hasDraft(rid){ return loadDraft(rid)!==null }
 
 // ── STATE ──────────────────────────────────────────────────────────────────────
 let currentRoutine=null, workoutData={}, selectedDay=null;
 
 // ── STORAGE ───────────────────────────────────────────────────────────────────
-function getHistory(){return JSON.parse(localStorage.getItem('gym_history')||'[]')}
-function saveHistory(h){localStorage.setItem('gym_history',JSON.stringify(h))}
-function getLastSession(rid){return getHistory().filter(s=>s.routineId===rid).sort((a,b)=>b.ts-a.ts)[0]||null}
-function getLastEx(rid,name){const s=getLastSession(rid);return s?s.exercises.find(e=>e.name===name)||null:null}
+function getHistory(){ return JSON.parse(localStorage.getItem('gym_history')||'[]') }
+function saveHistory(h){ localStorage.setItem('gym_history',JSON.stringify(h)) }
+function getLastSession(rid){ return getHistory().filter(s=>s.routineId===rid).sort((a,b)=>b.ts-a.ts)[0]||null }
+function getLastEx(rid,name){ const s=getLastSession(rid); return s?s.exercises.find(e=>e.name===name)||null:null }
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
-function getRepsMax(str){const p=str.split('–');return parseInt(p[p.length-1])}
-function allAtMax(sets,repsStr){const m=getRepsMax(repsStr);return sets.every(s=>s.done&&parseInt(s.reps)>=m)}
+function getRepsMax(str){ const p=str.split('–'); return parseInt(p[p.length-1]) }
+function allAtMax(sets,repsStr){ const m=getRepsMax(repsStr); return sets.every(s=>s.done&&parseInt(s.reps)>=m) }
 
 // ── HOME ──────────────────────────────────────────────────────────────────────
 function initHome(){
   document.getElementById('home-date').textContent=
     new Date().toLocaleDateString('es-MX',{weekday:'long',day:'numeric',month:'long'});
+
+  // Resume banner
+  const draftR=ROUTINES.find(r=>hasDraft(r.id));
+  const banner=document.getElementById('resume-banner');
+  if(draftR){
+    const d=loadDraft(draftR.id);
+    const done=d?Object.values(d).reduce((a,ex)=>a+ex.sets.filter(s=>s.done).length,0):0;
+    document.getElementById('resume-text').textContent=`${draftR.name} · ${done} series completadas`;
+    document.getElementById('resume-btn').onclick=()=>startWorkout(draftR.id);
+    banner.style.display='flex';
+  } else {
+    banner.style.display='none';
+  }
+
   const days=['Lunes','Martes','Miércoles','Jueves','Viernes'];
   document.getElementById('day-chips').innerHTML=days.map(d=>{
     let cls='day-chip';
-    if(selectedDay===d) cls+= ROUTINES.find(r=>r.day===d)?.type==='upper'?' sel-upper':' sel-lower';
+    if(selectedDay===d) cls+=ROUTINES.find(r=>r.day===d)?.type==='upper'?' sel-upper':' sel-lower';
     return `<button class="${cls}" onclick="filterDay('${d}')">${d}</button>`;
   }).join('');
-  const list=document.getElementById('routine-list');
+
   const shown=selectedDay?ROUTINES.filter(r=>r.day===selectedDay):ROUTINES;
-  list.innerHTML=shown.map(r=>{
+  document.getElementById('routine-list').innerHTML=shown.map(r=>{
     const last=getLastSession(r.id);
     const lastDate=last?new Date(last.ts).toLocaleDateString('es-MX',{day:'numeric',month:'short'}):null;
     const badge=r.type==='upper'?'badge-upper':'badge-lower';
     const tag=r.type==='upper'?'tag-purple':'tag-teal';
+    const draftBadge=hasDraft(r.id)?'<span class="tag" style="background:#FAEEDA;color:#BA7517"><i class="ti ti-pencil" style="font-size:10px"></i> Borrador</span>':'';
     return `<div class="routine-card" onclick="startWorkout('${r.id}')">
       <div class="routine-card-header">
         <div class="routine-badge ${badge}">${r.name[0]}${r.name.slice(-1)}</div>
@@ -449,21 +498,32 @@ function initHome(){
         <span class="tag ${tag}">${r.exercises.length} ejercicios</span>
         <span class="tag tag-gray">${r.exercises.reduce((a,e)=>a+e.series,0)} series</span>
         <span class="tag tag-gray">${lastDate?'Último: '+lastDate:'Sin sesiones'}</span>
+        ${draftBadge}
       </div>
     </div>`;
   }).join('');
 }
-function filterDay(d){selectedDay=selectedDay===d?null:d;initHome()}
+function filterDay(d){ selectedDay=selectedDay===d?null:d; initHome() }
 
 // ── WORKOUT ───────────────────────────────────────────────────────────────────
 function startWorkout(rid){
   currentRoutine=ROUTINES.find(r=>r.id===rid);
+  const draft=loadDraft(rid);
+
+  // Init workoutData from draft or empty
   workoutData={};
   currentRoutine.exercises.forEach((_,i)=>{
-    workoutData[i]={sets:Array.from({length:currentRoutine.exercises[i].series},()=>({weight:'',reps:'',done:false}))};
+    if(draft?.[i]){
+      workoutData[i]=JSON.parse(JSON.stringify(draft[i]));
+    } else {
+      workoutData[i]={sets:Array.from({length:currentRoutine.exercises[i].series},()=>({weight:'',reps:'',done:false}))};
+    }
   });
+
   document.getElementById('workout-title').textContent=currentRoutine.name;
   document.getElementById('workout-subtitle').textContent=currentRoutine.desc;
+
+  const u=getUnit();
   const content=document.getElementById('workout-content');
   content.innerHTML=`<div class="section-title">10 min calentamiento · Cardio 20 min al finalizar</div>`+
     currentRoutine.exercises.map((ex,ei)=>{
@@ -474,19 +534,36 @@ function startWorkout(rid){
       let rows='';
       for(let s=0;s<ex.series;s++){
         const ls=lastEx?.sets?.[s];
+        const ws=workoutData[ei].sets[s];
+        const wu=ws.unit||'kg';
         rows+=`<div class="series-row sets-grid" id="row-${ei}-${s}">
           <div class="series-num">${s+1}</div>
-          <input class="series-input" type="number" inputmode="decimal" placeholder="${ls?.weight||'kg'}" id="w-${ei}-${s}" onchange="updateSet(${ei},${s})">
-          <input class="series-input" type="number" inputmode="numeric" placeholder="${ls?.reps||'reps'}" id="r-${ei}-${s}" onchange="updateSet(${ei},${s})">
-          <button class="series-done" id="done-${ei}-${s}" onclick="toggleDone(${ei},${s})"><i class="ti ti-check"></i></button>
+          <input class="series-input w-input" type="number" inputmode="decimal"
+            placeholder="${ls?.weight||wu}"
+            value="${ws.weight||''}"
+            data-prev="${ls?.weight||''}"
+            id="w-${ei}-${s}" onchange="updateSet(${ei},${s})">
+          <input class="series-input" type="number" inputmode="numeric"
+            placeholder="${ls?.reps||'reps'}"
+            value="${ws.reps||''}"
+            id="r-${ei}-${s}" onchange="updateSet(${ei},${s})">
+          <div class="unit-toggle">
+            <button class="unit-opt${wu==='kg'?' sel-kg':''}" id="u-${ei}-${s}-kg" onclick="setSetUnit(${ei},${s},'kg')">kg</button>
+            <button class="unit-opt${wu==='lb'?' sel-lb':''}" id="u-${ei}-${s}-lb" onclick="setSetUnit(${ei},${s},'lb')">lb</button>
+          </div>
+          <button class="series-done${ws.done?' checked':''}" id="done-${ei}-${s}" onclick="toggleDone(${ei},${s})">
+            <i class="ti ti-check"></i>
+          </button>
         </div>`;
       }
       let prevInfo='';
       if(lastEx?.sets?.length){
         const mw=Math.max(...lastEx.sets.map(s=>parseFloat(s.weight)||0));
-        if(mw>0) prevInfo=`<div class="notes-text">Sesión anterior: ${mw} kg · ${lastEx.sets[0]?.reps||'?'} reps</div>`;
+        const lu=getLastSession(rid)?.unit||'kg';
+        if(mw>0) prevInfo=`<div class="notes-text">Sesión anterior: ${mw}${lu} · ${lastEx.sets[0]?.reps||'?'} reps</div>`;
       }
-      return `<div class="ex-card" id="ex-${ei}">
+      const hasDraftData=draft?.[ei]?.sets?.some(s=>s.done||s.weight||s.reps);
+      return `<div class="ex-card${hasDraftData?' open':''}" id="ex-${ei}">
         <div class="ex-header" onclick="toggleEx(${ei})">
           <div>
             <div class="ex-name">${ex.name}${restBadge}</div>
@@ -497,8 +574,9 @@ function startWorkout(rid){
         <div class="ex-body">
           <div class="sets-grid" style="padding:6px 0 2px">
             <div></div>
-            <div class="col-label">PESO (kg)</div>
+            <div class="col-label">PESO</div>
             <div class="col-label">REPS</div>
+            <div class="col-label">UNIDAD</div>
             <div></div>
           </div>
           ${rows}${prevInfo}
@@ -506,10 +584,29 @@ function startWorkout(rid){
         </div>
       </div>`;
     }).join('');
+
+  // Restore tips for exercises with draft data
+  if(draft){
+    currentRoutine.exercises.forEach((_,ei)=>updateTip(ei));
+  }
+
   showPage('workout',null,'internal');
 }
 
-function toggleEx(ei){document.getElementById(`ex-${ei}`).classList.toggle('open')}
+function toggleEx(ei){ document.getElementById(`ex-${ei}`).classList.toggle('open') }
+
+function setSetUnit(ei,si,u){
+  workoutData[ei].sets[si].unit=u;
+  // update toggle UI
+  ['kg','lb'].forEach(opt=>{
+    const btn=document.getElementById(`u-${ei}-${si}-${opt}`);
+    if(btn){ btn.className='unit-opt'+(u===opt?' sel-'+opt:''); }
+  });
+  // update placeholder
+  const inp=document.getElementById(`w-${ei}-${si}`);
+  if(inp && !inp.value) inp.placeholder=inp.dataset.prev||u;
+  saveDraft(currentRoutine.id,workoutData);
+}
 
 function toggleDone(ei,si){
   const s=workoutData[ei].sets[si];
@@ -517,12 +614,14 @@ function toggleDone(ei,si){
   s.reps=document.getElementById(`r-${ei}-${si}`).value;
   s.done=!s.done;
   document.getElementById(`done-${ei}-${si}`).classList.toggle('checked',s.done);
+  saveDraft(currentRoutine.id,workoutData);
   updateTip(ei);
 }
 
 function updateSet(ei,si){
   workoutData[ei].sets[si].weight=document.getElementById(`w-${ei}-${si}`).value;
   workoutData[ei].sets[si].reps=document.getElementById(`r-${ei}-${si}`).value;
+  saveDraft(currentRoutine.id,workoutData);
   updateTip(ei);
 }
 
@@ -530,6 +629,7 @@ function updateTip(ei){
   const ex=currentRoutine.exercises[ei];
   const sets=workoutData[ei].sets;
   const tip=document.getElementById(`tip-${ei}`);
+  if(!tip) return;
   const done=sets.filter(s=>s.done).length;
   if(!done){tip.innerHTML='';return}
   if(done<ex.series){
@@ -537,7 +637,7 @@ function updateTip(ei){
     return;
   }
   if(allAtMax(sets,ex.reps)){
-    tip.innerHTML=`<div class="progress-tip tip-success"><i class="ti ti-trending-up"></i><span>¡Rango máximo en todas las series! <strong>Sube 2.5 kg la próxima sesión.</strong></span></div>`;
+    tip.innerHTML=`<div class="progress-tip tip-success"><i class="ti ti-trending-up"></i><span>¡Rango máximo en todas las series! <strong>Sube 2.5 la próxima sesión.</strong></span></div>`;
   } else {
     const avg=(sets.reduce((a,s)=>a+(parseInt(s.reps)||0),0)/sets.length).toFixed(1);
     tip.innerHTML=`<div class="progress-tip tip-warn"><i class="ti ti-check"></i>Completado · Promedio: ${avg} reps. Mantén el peso hasta alcanzar el máximo en todas las series.</div>`;
@@ -550,17 +650,19 @@ function finishWorkout(){
   document.getElementById('modal-summary').textContent=`${currentRoutine.name} · ${total} de ${totalS} series completadas`;
   document.getElementById('modal-finish').classList.add('open');
 }
-function closeModal(){document.getElementById('modal-finish').classList.remove('open')}
+function closeModal(){ document.getElementById('modal-finish').classList.remove('open') }
 
 function saveWorkout(){
   const h=getHistory();
   h.unshift({
     ts:Date.now(), routineId:currentRoutine.id, routineName:currentRoutine.name,
+    unit:getUnit(),
     exercises:currentRoutine.exercises.map((ex,ei)=>({
       name:ex.name, sets:workoutData[ei].sets.filter(s=>s.done)
     })).filter(e=>e.sets.length)
   });
   saveHistory(h);
+  clearDraft(currentRoutine.id);
   closeModal();
   showPage('history',document.querySelectorAll('.sb-btn')[1],'sb');
   renderHistory();
@@ -578,10 +680,11 @@ function renderHistory(){
     const date=new Date(s.ts).toLocaleDateString('es-MX',{weekday:'short',day:'numeric',month:'long'});
     const time=new Date(s.ts).toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'});
     const badge=s.routineId.startsWith('upper')?'tag-purple':'tag-teal';
+    const unit=s.unit||'kg';
     const rows=s.exercises.map(ex=>{
       const mw=ex.sets.length?Math.max(...ex.sets.map(s=>parseFloat(s.weight)||0)):0;
       const tr=ex.sets.reduce((a,s)=>a+(parseInt(s.reps)||0),0);
-      return `<div class="hist-row"><span class="hist-ex">${ex.name}</span><span class="hist-val">${mw>0?mw+'kg':'—'} · ${tr} reps</span></div>`;
+      return `<div class="hist-row"><span class="hist-ex">${ex.name}</span><span class="hist-val">${mw>0?mw+unit:'—'} · ${tr} reps</span></div>`;
     }).join('');
     return `<div class="hist-item">
       <div class="hist-date">${date} · ${time}</div>
@@ -605,13 +708,11 @@ function renderProgress(){
     <div class="stat-card"><div class="stat-val">${totSess}</div><div class="stat-lbl">Sesiones completadas</div></div>
     <div class="stat-card"><div class="stat-val">${(totVol/1000).toFixed(1)}t</div><div class="stat-lbl">Volumen total levantado</div></div>
   </div><div class="section-title">Progresión por ejercicio (últimas 6 sesiones)</div><div class="prog-grid">`;
-
   const exMap={};
   h.forEach(s=>s.exercises.forEach(ex=>{
     const mw=ex.sets.length?Math.max(...ex.sets.map(s=>parseFloat(s.weight)||0)):0;
-    if(mw>0){if(!exMap[ex.name])exMap[ex.name]=[];exMap[ex.name].push({ts:s.ts,weight:mw});}
+    if(mw>0){if(!exMap[ex.name])exMap[ex.name]=[];exMap[ex.name].push({ts:s.ts,weight:mw,unit:s.unit||'kg'});}
   }));
-
   const entries=Object.entries(exMap).filter(([,v])=>v.length>1);
   if(!entries.length){
     html+=`<div style="grid-column:1/-1" class="empty"><i class="ti ti-trending-up"></i>Completa al menos 2 sesiones del mismo ejercicio.</div>`;
@@ -620,7 +721,7 @@ function renderProgress(){
       const sorted=data.sort((a,b)=>a.ts-b.ts);
       const recent=sorted.slice(-6);
       const first=sorted[0].weight, last=sorted[sorted.length-1].weight;
-      const diff=last-first;
+      const diff=+(last-first).toFixed(1);
       const max=Math.max(...recent.map(d=>d.weight));
       const bars=recent.map(d=>{
         const bh=Math.round((d.weight/max)*60)||4;
@@ -635,7 +736,7 @@ function renderProgress(){
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
           <div style="font-size:13px;font-weight:600;flex:1;padding-right:8px">${name}</div>
           <div style="font-size:13px;font-weight:700;white-space:nowrap;color:${diff>0?'var(--teal)':diff<0?'var(--danger)':'var(--gray)'}">
-            ${diff>0?'+':''}${diff}kg <span style="font-size:11px;font-weight:400;color:var(--text2)">${first}→${last}</span>
+            ${diff>0?'+':''}${diff} <span style="font-size:11px;font-weight:400;color:var(--text2)">${first}→${last}</span>
           </div>
         </div>
         <div class="chart-wrap"><div class="chart-bar-row">${bars}</div></div>
@@ -653,10 +754,9 @@ function initBackup(){
   if(h.length){
     const last=new Date(h[0].ts).toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'});
     el.textContent=`${h.length} sesiones guardadas · Último: ${last}`;
-  } else {el.textContent='No hay sesiones guardadas aún.';}
+  } else { el.textContent='No hay sesiones guardadas aún.'; }
   document.getElementById('import-status').innerHTML='';
 }
-
 function exportData(){
   const h=getHistory();
   if(!h.length){alert('No tienes entrenamientos guardados.');return;}
@@ -664,34 +764,32 @@ function exportData(){
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
   a.download=`gymtracker_${new Date().toISOString().slice(0,10)}.json`;
-  a.click();URL.revokeObjectURL(a.href);
+  a.click(); URL.revokeObjectURL(a.href);
 }
-
 function importData(input){
-  const file=input.files[0];if(!file)return;
+  const file=input.files[0]; if(!file) return;
   const reader=new FileReader();
   reader.onload=e=>{
     try{
       const parsed=JSON.parse(e.target.result);
       const history=parsed.history||parsed;
-      if(!Array.isArray(history))throw new Error();
-      if(!confirm(`¿Importar ${history.length} sesiones? Esto reemplazará el historial actual.`))return;
+      if(!Array.isArray(history)) throw new Error();
+      if(!confirm(`¿Importar ${history.length} sesiones? Esto reemplazará el historial actual.`)) return;
       saveHistory(history);
       document.getElementById('import-status').innerHTML=
         `<div class="progress-tip tip-success"><i class="ti ti-check"></i>${history.length} sesiones importadas correctamente.</div>`;
       input.value='';
-    }catch{
+    } catch{
       document.getElementById('import-status').innerHTML=
         `<div class="progress-tip tip-warn"><i class="ti ti-alert-triangle"></i>Archivo inválido. Asegúrate de que sea un respaldo de GymTracker.</div>`;
     }
   };
   reader.readAsText(file);
 }
-
 function clearData(){
   const h=getHistory();
   if(!h.length){alert('No hay historial que borrar.');return;}
-  if(!confirm(`¿Borrar ${h.length} sesiones? Esta acción no se puede deshacer.`))return;
+  if(!confirm(`¿Borrar ${h.length} sesiones? Esta acción no se puede deshacer.`)) return;
   saveHistory([]);
   initBackup();
   alert('Historial borrado.');
@@ -701,22 +799,18 @@ function clearData(){
 function showPage(id,btn,source){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(`page-${id}`).classList.add('active');
-  // sync both nav bars
   document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  if(btn&&source==='sb') btn.classList.add('active');
-  if(btn&&source==='bn') btn.classList.add('active');
-  // re-activate matching buttons in both navs by index
   const pages=['home','history','progress','backup'];
   const idx=pages.indexOf(id);
   if(idx>=0){
     document.querySelectorAll('.sb-btn')[idx]?.classList.add('active');
     document.querySelectorAll('.nav-btn')[idx]?.classList.add('active');
   }
-  if(id==='history')renderHistory();
-  if(id==='progress')renderProgress();
-  if(id==='home')initHome();
-  if(id==='backup')initBackup();
+  if(id==='history') renderHistory();
+  if(id==='progress') renderProgress();
+  if(id==='home') initHome();
+  if(id==='backup') initBackup();
   document.querySelector('.main').scrollTop=0;
 }
 
