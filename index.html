@@ -361,70 +361,60 @@ const C='2–3 min', A='60–90 seg';
 const ROUTINES=[
   {
     id:'upperA', name:'Upper A', type:'upper', day:'Martes',
-    desc:'PUSH — Pecho · Hombros · Tríceps',
+    desc:'PUSH — Pecho · Hombros · Tríceps · Bíceps',
     exercises:[
       {name:'Press De Pecho con Barra',                    series:4,reps:'6–8',  rest:C,notes:'Agarre mayor que hombros. Barra baja al esternón. Ejercicio base de la semana'},
       {name:'Press Banco Inclinado con Barra',             series:3,reps:'8–10', rest:C,notes:'30–45° inclinación. Énfasis en pecho superior'},
       {name:'Cristos Máquina Peck Fly',                    series:3,reps:'10–12',rest:A,notes:'Cierre de pecho. Contrae en el punto de máxima aducción'},
-      {name:'Press Militar con Barra',                     series:3,reps:'8–10', rest:C,notes:'De pie o sentado. Core apretado. No arquear espalda baja'},
-      {name:'Remo con Mancuerna Unilateral ✦',             series:3,reps:'12–15',rest:A,notes:'Deltoides posterior. Torso inclinado, codo sube al costado. Una mano apoyada en banco'},
-      {name:'Chest Press en Máquina ✦',                    series:3,reps:'10–12',rest:A,notes:'Ángulo diferente al press plano con barra. Énfasis en pecho con mayor control'},
-      {name:'Tríceps en Máquina Agarre Cerrado ✦',         series:3,reps:'10–12',rest:A,notes:'Codos junto al cuerpo durante todo el movimiento. Aislamiento de tríceps'},
+      {name:'Chest Press en Máquina',                      series:3,reps:'10–12',rest:A,notes:'Ángulo diferente al press plano con barra. Mayor control'},
+      {name:'Press Militar con Barra',                     series:3,reps:'8–10', rest:C,notes:'Core apretado. No arquear espalda baja'},
+      {name:'Remo con Mancuerna Unilateral',               series:3,reps:'12–15',rest:A,notes:'Deltoides posterior. Apoya rodilla y mano en banco. Codo sube al costado'},
+      {name:'Elevaciones Laterales Mancuerna',             series:3,reps:'12–15',rest:A,notes:'Deltoides medial. Codo ligeramente doblado. No uses impulso'},
+      {name:'Tríceps en Máquina Agarre Cerrado',           series:3,reps:'10–12',rest:A,notes:'Codos junto al cuerpo. Aislamiento de tríceps'},
+      {name:'Curl Martillo con Mancuerna',                 series:2,reps:'10–12',rest:A,notes:'Agarre neutro (palmas enfrentadas). Activa braquial y braquiorradial además del bíceps. Frecuencia 2 con volumen mínimo efectivo'},
     ]
   },
   {
-    id:'lowerA', name:'Lower A', type:'lower', day:'Miércoles',
-    desc:'Cuádriceps · Femoral · Glúteo · Pantorrilla',
+    id:'lowerA', name:'Lower A', type:'lower', day:'Lunes',
+    desc:'Cuádriceps · Femoral · Glúteo · Pantorrilla · Abdomen',
     exercises:[
-      {name:'Sentadilla En Smith',                         series:4,reps:'8–10', rest:C,notes:'Pies a la altura de hombros. Rodillas siguen dirección de pies'},
+      {name:'Sentadilla En Smith',                         series:4,reps:'8–10', rest:C,notes:'Pies al ancho de hombros. Rodillas siguen dirección de pies'},
       {name:'Leg Press 45°',                               series:3,reps:'10–12',rest:C,notes:'Pies al ancho de hombros. Rodillas no pasan los pies'},
-      {name:'Peso Muerto Rumano con Barra ✦',              series:4,reps:'8–10', rest:C,notes:'Rodillas ligeramente flexionadas. Espalda neutral. Barra cerca del cuerpo en todo el recorrido'},
-      {name:'Extensión De Pierna (Máquina)',               series:3,reps:'12–15',rest:A,notes:'Aislamiento de cuádriceps. Control total en la bajada'},
-      {name:'Seated Leg Curl',                             series:3,reps:'10–12',rest:A,notes:'Pausa 1 seg en contracción. Femoral'},
+      {name:'Peso Muerto Rumano con Barra',                series:4,reps:'8–10', rest:C,notes:'Rodillas ligeramente flexionadas. Espalda neutral. Barra cerca del cuerpo'},
+      {name:'Extensión De Pierna (Máquina)',               series:3,reps:'12–15',rest:A,notes:'Control en la bajada. Aislamiento de cuádriceps'},
+      {name:'Curl Femoral Acostado (Lying Leg Curl)',      series:3,reps:'10–12',rest:A,notes:'Boca abajo en la máquina. Caderas pegadas al banco. Pausa 1 seg en contracción'},
       {name:'Hip Thrust Máquina',                          series:3,reps:'10–12',rest:C,notes:'Énfasis en glúteo. Variante si no hay máquina: patada trasera en cable'},
-      {name:'Pantorrilla en Prensa Horizontal ✦',          series:4,reps:'12–15',rest:A,notes:'Empuja con el metatarso. Rango completo, pausa en estiramiento. Gemelo y sóleo'},
+      {name:'Pantorrilla en Prensa Horizontal',            series:4,reps:'12–15',rest:A,notes:'Empuja con el metatarso. Rango completo. Pausa en estiramiento'},
       {name:'Abdominales En Máquina (Crunch)',             series:3,reps:'12–15',rest:A,notes:'Exhala al contraer. Core apretado en todo momento'},
     ]
   },
   {
     id:'upperB', name:'Upper B', type:'upper', day:'Jueves',
-    desc:'PULL — Espalda · Hombro Posterior · Bíceps',
+    desc:'PULL — Espalda · Hombros · Bíceps',
     exercises:[
       {name:'Remo con Barra (Bent Over Row)',              series:4,reps:'8–10', rest:C,notes:'Torso a 45°. Barra sube al abdomen. Activa dorsal, trapecio y romboides'},
-      {name:'Pull Over con Mancuerna en Banco ✦',          series:3,reps:'10–12',rest:A,notes:'Acuéstate perpendicular al banco. Brazos semirrectos. Baja mancuerna detrás de la cabeza. Dorsal y serrato'},
+      {name:'Pull Over con Mancuerna en Banco',            series:3,reps:'10–12',rest:A,notes:'Acuéstate perpendicular al banco. Brazos semirrectos. Baja mancuerna detrás de la cabeza. Dorsal y serrato'},
       {name:'Jalón Polea Alta con Triángulo',              series:4,reps:'8–10', rest:C,notes:'Agarre neutro. Tira hacia el esternón. Activa dorsal y bíceps'},
-      {name:'Dominada Asistida Agarre Abierto',            series:3,reps:'8–10', rest:C,notes:'Mejor ejercicio para dorsal. Reduce asistencia progresivamente cada semana'},
+      {name:'Dominada Asistida Agarre Abierto',            series:3,reps:'8–10', rest:C,notes:'PROGRESIÓN INVERSA: más peso en la máquina = más fácil. Reduce el contrapeso cada semana para cargar más tu propio peso. Objetivo: dominada sin asistencia'},
       {name:'Peck Deck Posterior en Máquina',              series:3,reps:'12–15',rest:A,notes:'Siéntate al revés. Alinea codos con hombros. Deltoides posterior'},
-      {name:'Curl con Barra Agarre Supino (Palmas Arriba)',              series:3,reps:'8–10', rest:A,notes:'CABEZA CORTA: agarre supino (palmas hacia arriba) al ancho de hombros. Codos fijos al costado. No balancees el torso'},
-      {name:'Curl Predicador con Barra W (EZ) ✦',          series:3,reps:'8–12', rest:A,notes:'CABEZA LARGA: barra W en banco predicador. Agarre semisupino reduce tensión en muñecas. Baja hasta estiramiento completo'},
+      {name:'Press Arnold con Mancuerna',                  series:3,reps:'10–12',rest:C,notes:'Empieza con palmas hacia ti (deltoides frontal), rota al subir (activa medial y posterior). El ejercicio más completo para los 3 haces del deltoides'},
+      {name:'Elevación Frontal con Mancuerna',             series:3,reps:'12–15',rest:A,notes:'Deltoides anterior. Mancuerna sube a la altura del hombro. Un brazo a la vez o simultáneo. Menos tensión lumbar que con barra'},
+      {name:'Curl con Barra Agarre Supino (Palmas Arriba)',series:3,reps:'8–10', rest:A,notes:'CABEZA CORTA: agarre supino al ancho de hombros. Codos fijos al costado. No balancees el torso'},
+      {name:'Curl Predicador con Barra W (EZ)',            series:3,reps:'8–12', rest:A,notes:'CABEZA LARGA: barra W en banco predicador. Agarre semisupino reduce tensión en muñecas. Baja hasta estiramiento completo'},
     ]
   },
   {
-    id:'lowerB', name:'Lower B', type:'lower', day:'Viernes',
-    desc:'Glúteo · Femoral · Abducción · Pantorrilla',
+    id:'lowerB', name:'Lower B', type:'lower', day:'Miércoles',
+    desc:'Glúteo · Femoral · Abducción · Pantorrilla · Abdomen',
     exercises:[
       {name:'Desplante Búlgaro',                           series:4,reps:'8–10', rest:C,notes:'Pie trasero elevado. Tronco erguido. Glúteo y cuádriceps. Mayor demanda que Lower A'},
       {name:'Máquina Hack (Hack Squat)',                   series:3,reps:'10–12',rest:C,notes:'Talones elevados si es posible. Cuádriceps. Ángulo diferente al Leg Press del Lower A'},
-      {name:'Peso Muerto Rumano con Barra',                series:4,reps:'8–10', rest:C,notes:'Mismo patrón que Lower A. En Lower B progresa la carga cuando la técnica esté consolidada'},
+      {name:'Peso Muerto Rumano con Barra',                series:4,reps:'8–10', rest:C,notes:'Mismo patrón que Lower A. Progresa la carga cuando la técnica esté consolidada'},
       {name:'Hip Thrust Máquina',                          series:3,reps:'10–12',rest:C,notes:'Añade carga respecto al Lower A. Mismo ejercicio, mayor intensidad progresiva'},
-      {name:'Abducción De Cadera En Máquina ✦',            series:3,reps:'12–15',rest:A,notes:'Aprieta glúteo en el cierre. Movimiento controlado, no uses impulso'},
+      {name:'Abducción De Cadera En Máquina',              series:3,reps:'12–15',rest:A,notes:'Aprieta glúteo en el cierre. Movimiento controlado, no uses impulso'},
       {name:'Máquina Aductora',                            series:3,reps:'12–15',rest:A,notes:'Complementa la abducción. Equilibrio muscular de cadera'},
-      {name:'Pantorrilla Sentado Máquina',                 series:4,reps:'12–15',rest:A,notes:'Sóleo. Alterna con pantorrilla en prensa del Lower A. Ambas cabezas del gemelo trabajan'},
+      {name:'Pantorrilla Sentado Máquina',                 series:4,reps:'12–15',rest:A,notes:'Sóleo. Alterna con pantorrilla en prensa horizontal del Lower A'},
       {name:'Crunch Oblicuo En Máquina',                   series:3,reps:'12–15',rest:A,notes:'Oblicuos y abdomen. Rota hacia el lado activo'},
-    ]
-  },
-  {
-    id:'upperC', name:'Upper C', type:'upper', day:'Sábado',
-    desc:'PUSH+PULL balanceado — Ángulos nuevos sin repetir ejercicios',
-    exercises:[
-      {name:'Press Inclinado en Máquina ✦',                series:3,reps:'10–12',rest:C,notes:'Pecho superior con mayor control que la barra. Ángulo diferente al Upper A y B'},
-      {name:'Press Militar con Barra (Sentado) ✦',         series:3,reps:'8–10', rest:C,notes:'Sentado para mayor aislamiento de deltoides. Agarre ligeramente mayor que hombros'},
-      {name:'Elevaciones Laterales Mancuerna',             series:3,reps:'12–15',rest:A,notes:'ÚNICO día de elevaciones laterales en la semana. Deltoides medial. Codo ligeramente doblado'},
-      {name:'Elevación Frontal con Mancuerna ✦',                 series:3,reps:'12–15',rest:A,notes:'Deltoides anterior. Un brazo a la vez o simultáneo. Mancuerna sube a la altura del hombro. Menos tensión lumbar que con barra'},
-      {name:'Jalón Al Frente (LatPull Down)',              series:3,reps:'8–10', rest:C,notes:'Agarre prono ancho. Diferente al triángulo del Jueves. Énfasis en dorsal externo'},
-      {name:'Remo Sentado en Máquina (Cable Row)',         series:3,reps:'8–10', rest:C,notes:'Remo horizontal. Diferente al bent over row del Jueves. Activa dorsal medio y romboides'},
-      {name:'Curl de Bíceps con Barra Romana ✦',           series:3,reps:'8–12', rest:A,notes:'EZ bar curl. La barra romana reduce tensión en muñecas. Trabajas ambas cabezas del bíceps'},
-      {name:'Extensión Tríceps Cable Polea Alta ✦',        series:3,reps:'10–12',rest:A,notes:'Diferente a los ejercicios de tríceps del Martes. Cuerda o barra recta. Codos fijos'},
     ]
   }
 ];
@@ -480,7 +470,7 @@ function initHome(){
     banner.style.display='none';
   }
 
-  const days=['Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const days=['Lunes','Martes','Miércoles','Jueves'];
   document.getElementById('day-chips').innerHTML=days.map(d=>{
     let cls='day-chip';
     if(selectedDay===d) cls+=ROUTINES.find(r=>r.day===d)?.type==='upper'?' sel-upper':' sel-lower';
