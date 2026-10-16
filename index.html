@@ -356,71 +356,72 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 
 <script>
 // ── ROUTINES DATA ──────────────────────────────────────────────────────────────
-const C='2–3 min', A='60–90 seg';
+const R='90 seg';
 
 const ROUTINES=[
   {
-    id:'upperI', name:'Upper I', type:'upper', day:'Lunes',
-    desc:'Compuestos base — Pecho · Espalda · Hombro · Tríceps',
+    id:'upperMonday', name:'Descanso activo', type:'upper', day:'Lunes',
+    desc:'HIIT en caminadora · Core · Hombro · Trapecio',
+    guidance:'Descanso activo · HIIT en caminadora · Cardio 15 min al finalizar',
     exercises:[
-      {name:'Press De Pecho con Barra',                    series:3,reps:'6–8',  rest:C,notes:'Agarre mayor que hombros. Barra baja al esternón. Ejercicio base de la semana'},
-      {name:'Remo con Barra (Bent Over Row)',              series:3,reps:'8–10', rest:C,notes:'Torso a 45°. Barra sube al abdomen. Activa dorsal, trapecio y romboides'},
-      {name:'Press de Hombro en Máquina',                  series:3,reps:'8–10', rest:C,notes:'Ajusta el asiento para que los codos queden a la altura de los hombros. Mayor estabilidad y aislamiento del deltoides que con barra'},
-      {name:'Tríceps en Máquina Agarre Cerrado',           series:3,reps:'10–12',rest:A,notes:'Codos fijos junto al cuerpo. Aislamiento de tríceps al final de la sesión'},
+      {name:'Plancha',                                     series:3,reps:'45',repsUnit:'segundos',rest:R,notes:'Mantén la posición durante 45 segundos en cada serie.'},
+      {name:'Face Pull en Polea',                          series:4,reps:'6–8',  rest:R,notes:'Peso máximo. Mantén el control del movimiento.'},
+      {name:'Dragon Flags',                                series:4,reps:'6–8',  rest:R,notes:'Peso corporal.'},
+      {name:'Encogimiento de Hombros con Barra',           series:3,reps:'6–8',  rest:R,notes:'Peso máximo.'},
     ]
   },
   {
-    id:'lowerA', name:'Lower A', type:'lower', day:'Martes',
-    desc:'Cuádriceps · Femoral · Glúteo · Pantorrilla · Abdomen',
+    id:'upperTuesday', name:'Pecho y espalda', type:'upper', day:'Miércoles',
+    desc:'Pecho · Espalda',
+    guidance:'Peso máximo · Descanso 90 seg · Cardio 15 min al finalizar',
     exercises:[
-      {name:'Sentadilla En Smith',                         series:4,reps:'8–10', rest:C,notes:'Pies al ancho de hombros. Rodillas siguen dirección de pies'},
-      {name:'Leg Press Unilateral 45°',                               series:3,reps:'10–12',rest:C,notes:'Un pie a la vez. Corrige desbalances entre piernas. Rodilla no pasa el pie. Misma carga en ambos lados'},
-      {name:'Peso Muerto Rumano con Barra',                series:4,reps:'8–10', rest:C,notes:'Rodillas ligeramente flexionadas. Espalda neutral. Barra cerca del cuerpo'},
-      {name:'Extensión De Pierna (Máquina)',               series:3,reps:'12–15',rest:A,notes:'Control en la bajada. Aislamiento de cuádriceps'},
-      {name:'Curl Femoral Acostado (Lying Leg Curl)',      series:3,reps:'10–12',rest:A,notes:'Boca abajo en la máquina. Caderas pegadas al banco. Pausa 1 seg en contracción'},
-      {name:'Hip Thrust Máquina',                          series:3,reps:'10–12',rest:C,notes:'Énfasis en glúteo. Variante si no hay máquina: patada trasera en cable'},
-      {name:'Pantorrilla en Prensa Horizontal',            series:4,reps:'12–15',rest:A,notes:'Empuja con el metatarso. Rango completo. Pausa en estiramiento'},
-      {name:'Abdominales En Máquina (Crunch)',             series:3,reps:'12–15',rest:A,notes:'Exhala al contraer. Core apretado en todo momento'},
+      {name:'Bench Press',                                 series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Dominadas',                                   series:4,reps:'8–10', rest:R,notes:'Peso corporal.'},
+      {name:'Press Inclinado con Mancuernas',              series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Jalón al Pecho',                              series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Cross Over en Polea',                         series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Remo en T con Barra Olímpica',                series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
     ]
   },
   {
-    id:'upperII', name:'Upper II', type:'upper', day:'Miércoles',
-    desc:'Pecho · Espalda profunda · Hombros · Bíceps',
+    id:'upperWednesday', name:'Brazo y hombro', type:'upper', day:'Viernes',
+    desc:'Bíceps · Tríceps · Hombros',
+    guidance:'Peso máximo · Descanso 90 seg · Cardio 15 min al finalizar',
     exercises:[
-      {name:'Press Banco Inclinado con Barra',             series:3,reps:'8–10', rest:C,notes:'30–45° inclinación. Énfasis en pecho superior. 2da frecuencia de pecho'},
-      {name:'Jalón Polea Alta con Triángulo',              series:4,reps:'8–10', rest:C,notes:'Agarre neutro. Tira hacia el esternón. 2da frecuencia de espalda'},
-      {name:'Dominada Asistida Agarre Abierto',            series:3,reps:'8–10', rest:C,notes:'PROGRESIÓN INVERSA: más peso en la máquina = más fácil. Reduce el contrapeso cada semana para cargar más tu propio peso. Objetivo: dominada sin asistencia'},
-      {name:'Press Arnold con Mancuerna',                  series:3,reps:'10–12',rest:C,notes:'Empieza con palmas hacia ti (deltoides frontal), rota al subir (activa medial y posterior). El ejercicio más completo para los 3 haces del deltoides'},
-      {name:'Cristos Máquina Peck Fly',                    series:3,reps:'10–12',rest:A,notes:'Cierre de pecho. Contrae en el punto de máxima aducción'},
-      {name:'Elevaciones Laterales Mancuerna',             series:3,reps:'12–15',rest:A,notes:'Deltoides medial. Codo ligeramente doblado. No uses impulso'},
-      {name:'Curl con Barra Agarre Supino (Palmas Arriba)',series:3,reps:'8–10', rest:A,notes:'CABEZA CORTA: agarre supino al ancho de hombros. Codos fijos al costado. No balancees el torso'},
-      {name:'Curl Martillo con Mancuerna',                 series:2,reps:'10–12',rest:A,notes:'Agarre neutro (palmas enfrentadas). Activa braquial y braquiorradial además del bíceps'},
+      {name:'Curl Spider con Barra',                      series:3,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Fondos en Banco',                            series:3,reps:'6–8',  rest:R,notes:'Peso corporal.'},
+      {name:'Curl Concentrado',                           series:3,reps:'6–8',  rest:R,notes:'6–8 repeticiones por lado. Peso máximo.'},
+      {name:'Press de Hombro en Máquina',                 series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Copa en Banco',                              series:3,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Elevaciones Laterales',                      series:3,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Curl Martillo con Mancuerna',                series:3,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Press Francés',                              series:3,reps:'6–8',  rest:R,notes:'Peso máximo.'},
     ]
   },
   {
-    id:'lowerB', name:'Lower B', type:'lower', day:'Jueves',
-    desc:'Glúteo · Femoral · Abducción · Pantorrilla · Abdomen',
+    id:'lowerThursday', name:'Glúteo y femoral', type:'lower', day:'Jueves',
+    desc:'Glúteo · Femoral · Aductores · Pantorrilla',
+    guidance:'Peso máximo · Descanso 90 seg · Cardio 15 min al finalizar',
     exercises:[
-      {name:'Desplante Búlgaro',                           series:4,reps:'8–10', rest:C,notes:'Pie trasero elevado. Tronco erguido. Glúteo y cuádriceps. Mayor demanda que Lower A'},
-      {name:'Máquina Hack (Hack Squat)',                   series:3,reps:'10–12',rest:C,notes:'Talones elevados si es posible. Cuádriceps. Ángulo diferente al Leg Press del Lower A'},
-      {name:'Peso Muerto Rumano con Barra',                series:4,reps:'8–10', rest:C,notes:'Mismo patrón que Lower A. Progresa la carga cuando la técnica esté consolidada'},
-      {name:'Hip Thrust Máquina',                          series:3,reps:'10–12',rest:C,notes:'Añade carga respecto al Lower A. Mismo ejercicio, mayor intensidad progresiva'},
-      {name:'Abducción De Cadera En Máquina',              series:3,reps:'12–15',rest:A,notes:'Aprieta glúteo en el cierre. Movimiento controlado, no uses impulso'},
-      {name:'Máquina Aductora',                            series:3,reps:'12–15',rest:A,notes:'Complementa la abducción. Equilibrio muscular de cadera'},
-      {name:'Pantorrilla Sentado Máquina',                 series:4,reps:'12–15',rest:A,notes:'Sóleo. Alterna con pantorrilla en prensa horizontal del Lower A'},
-      {name:'Crunch Oblicuo En Máquina',                   series:3,reps:'12–15',rest:A,notes:'Oblicuos y abdomen. Rota hacia el lado activo'},
+      {name:'Hip Thrust en Máquina o Libre',              series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Peso Muerto en Smith',                       series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Aductor en Máquina',                         series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Femoral Acostado en Máquina',                series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Sentadilla Sumo',                            series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
+      {name:'Pantorrilla en Máquina',                     series:4,reps:'6–8',  rest:R,notes:'Peso máximo.'},
     ]
   },
   {
-    id:'upperIII', name:'Upper III', type:'upper', day:'Viernes',
-    desc:'Accesorios — Pecho · Espalda · Deltoides posterior · Bíceps',
+    id:'lowerFriday', name:'Pierna — Cuádriceps', type:'lower', day:'Martes',
+    desc:'Cuádriceps · Abductores',
+    guidance:'Peso máximo · Descanso 90 seg · Cardio 15 min al finalizar',
     exercises:[
-      {name:'Chest Press en Máquina',                      series:3,reps:'10–12',rest:A,notes:'Ángulo diferente al press con barra. Mayor control. 3ra frecuencia de pecho'},
-      {name:'Pull Over con Mancuerna en Banco',            series:3,reps:'10–12',rest:A,notes:'Acuéstate perpendicular al banco. Brazos semirrectos. Baja mancuerna detrás de la cabeza. Dorsal y serrato'},
-      {name:'Remo con Mancuerna Unilateral',               series:3,reps:'12–15',rest:A,notes:'Deltoides posterior. Apoya rodilla y mano en banco. Codo sube al costado'},
-      {name:'Peck Deck Posterior en Máquina',              series:3,reps:'12–15',rest:A,notes:'Siéntate al revés. Alinea codos con hombros. Deltoides posterior'},
-      {name:'Elevación Frontal con Mancuerna',             series:3,reps:'12–15',rest:A,notes:'Deltoides anterior. Mancuerna sube a la altura del hombro. Un brazo a la vez o simultáneo'},
-      {name:'Curl Predicador con Barra W (EZ)',            series:3,reps:'8–12', rest:A,notes:'CABEZA LARGA: barra W en banco predicador. Agarre semisupino reduce tensión en muñecas. Baja hasta estiramiento completo'},
+      {name:'Sentadilla Libre',                           series:3,reps:'8–10', rest:R,notes:'Peso máximo.'},
+      {name:'Prensa',                                      series:3,reps:'8–10', rest:R,notes:'Peso máximo.'},
+      {name:'Sentadilla Goblet con Calzas',               series:3,reps:'8–10', rest:R,notes:'Peso máximo.'},
+      {name:'Extensión de Pierna',                        series:3,reps:'8–10', rest:R,notes:'Peso máximo; incluye isometría.'},
+      {name:'Desplantes Fijos',                           series:3,reps:'10 por pierna',rest:R,notes:'Con peso; completa 10 repeticiones por cada pierna.'},
+      {name:'Abductor',                                   series:3,reps:'6–8',  rest:R,notes:'Peso máximo.'},
     ]
   }
 ];
@@ -483,7 +484,8 @@ function initHome(){
     return `<button class="${cls}" onclick="filterDay('${d}')">${d}</button>`;
   }).join('');
 
-  const shown=selectedDay?ROUTINES.filter(r=>r.day===selectedDay):ROUTINES;
+  const shown=(selectedDay?ROUTINES.filter(r=>r.day===selectedDay):ROUTINES)
+    .sort((a,b)=>days.indexOf(a.day)-days.indexOf(b.day));
   document.getElementById('routine-list').innerHTML=shown.map(r=>{
     const last=getLastSession(r.id);
     const lastDate=last?new Date(last.ts).toLocaleDateString('es-MX',{day:'numeric',month:'short'}):null;
@@ -526,12 +528,10 @@ function startWorkout(rid){
 
   const u=getUnit();
   const content=document.getElementById('workout-content');
-  content.innerHTML=`<div class="section-title">10 min calentamiento · Cardio 20 min al finalizar</div>`+
+  content.innerHTML=`<div class="section-title">${currentRoutine.guidance}</div>`+
     currentRoutine.exercises.map((ex,ei)=>{
       const lastEx=getLastEx(rid,ex.name);
-      const restBadge=ex.rest===C
-        ?`<span class="rest-badge rest-c"><i class="ti ti-clock"></i> 2–3 min</span>`
-        :`<span class="rest-badge rest-a"><i class="ti ti-clock"></i> 60–90 seg</span>`;
+      const restBadge=`<span class="rest-badge rest-a"><i class="ti ti-clock"></i> ${ex.rest}</span>`;
       let rows='';
       for(let s=0;s<ex.series;s++){
         const ls=lastEx?.sets?.[s];
@@ -545,7 +545,7 @@ function startWorkout(rid){
             data-prev="${ls?.weight||''}"
             id="w-${ei}-${s}" onchange="updateSet(${ei},${s})">
           <input class="series-input" type="number" inputmode="numeric"
-            placeholder="${ls?.reps||'reps'}"
+            placeholder="${ls?.reps||(ex.repsUnit==='segundos'?'seg':'reps')}"
             value="${ws.reps||''}"
             id="r-${ei}-${s}" onchange="updateSet(${ei},${s})">
           <div class="unit-toggle">
@@ -568,15 +568,16 @@ function startWorkout(rid){
         <div class="ex-header" onclick="toggleEx(${ei})">
           <div>
             <div class="ex-name">${ex.name}${restBadge}</div>
-            <div class="ex-meta">${ex.series} series · ${ex.reps} reps</div>
+            <div class="ex-meta">${ex.volumeUnspecified?'Volumen no especificado · '+ex.reps:`${ex.series} series · ${ex.reps}${ex.repsUnit?' '+ex.repsUnit:' reps'}`}</div>
           </div>
           <i class="ti ti-chevron-down ex-chevron"></i>
         </div>
         <div class="ex-body">
+          ${ex.notes?`<div class="notes-text">${ex.notes}</div>`:''}
           <div class="sets-grid" style="padding:6px 0 2px">
             <div></div>
             <div class="col-label">PESO</div>
-            <div class="col-label">REPS</div>
+            <div class="col-label">${ex.repsUnit==='segundos'?'SEGUNDOS':'REPS'}</div>
             <div class="col-label">UNIDAD</div>
             <div></div>
           </div>
@@ -637,6 +638,10 @@ function updateTip(ei){
     tip.innerHTML=`<div class="progress-tip tip-info"><i class="ti ti-player-play"></i>${done}/${ex.series} series completadas</div>`;
     return;
   }
+  if(ex.repsUnit==='segundos'){
+    tip.innerHTML=`<div class="progress-tip tip-success"><i class="ti ti-check"></i>Duración registrada.</div>`;
+    return;
+  }
   if(allAtMax(sets,ex.reps)){
     tip.innerHTML=`<div class="progress-tip tip-success"><i class="ti ti-trending-up"></i><span>¡Rango máximo en todas las series! <strong>Sube 2.5 la próxima sesión.</strong></span></div>`;
   } else {
@@ -659,7 +664,7 @@ function saveWorkout(){
     ts:Date.now(), routineId:currentRoutine.id, routineName:currentRoutine.name,
     unit:getUnit(),
     exercises:currentRoutine.exercises.map((ex,ei)=>({
-      name:ex.name, sets:workoutData[ei].sets.filter(s=>s.done)
+      name:ex.name, repsUnit:ex.repsUnit||'reps', sets:workoutData[ei].sets.filter(s=>s.done)
     })).filter(e=>e.sets.length)
   });
   saveHistory(h);
@@ -685,7 +690,7 @@ function renderHistory(){
     const rows=s.exercises.map(ex=>{
       const mw=ex.sets.length?Math.max(...ex.sets.map(s=>parseFloat(s.weight)||0)):0;
       const tr=ex.sets.reduce((a,s)=>a+(parseInt(s.reps)||0),0);
-      return `<div class="hist-row"><span class="hist-ex">${ex.name}</span><span class="hist-val">${mw>0?mw+unit:'—'} · ${tr} reps</span></div>`;
+      return `<div class="hist-row"><span class="hist-ex">${ex.name}</span><span class="hist-val">${mw>0?mw+unit:'—'} · ${tr} ${ex.repsUnit||'reps'}</span></div>`;
     }).join('');
     return `<div class="hist-item">
       <div class="hist-date">${date} · ${time}</div>
